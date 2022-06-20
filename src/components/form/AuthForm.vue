@@ -1,6 +1,9 @@
 <template>
     <form @submit.prevent="handleSubmit">
-        <button type="submit" class="btn">Подбор жилья</button>
+        <input
+           v-model="price"
+         />   
+        <button type="submit">Подбор жилья</button>
     </form>
 </template>
 
@@ -14,7 +17,6 @@ export default {
     data() {
         return {
             price: "",
-            city: "",
         };
     },
     computed: {
@@ -22,7 +24,6 @@ export default {
     methods: {
         handleSubmit() {
             this.$emit("submit", {
-                city: this.city,
                 price: this.price,
             });
         },
@@ -30,13 +31,6 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
-.btn {
-    margin-left: auto;
-    padding: 0 40px;
-}
+<style  scoped>
 
-.select {
-    margin-left: 50px;
-}
 </style>
