@@ -1,8 +1,8 @@
 <template>
     <h1>Аналитика</h1>
-    <div class="hello" id="root">
+    <main class="hello" id="root">
         <h2>Аналитика по визитам</h2>
-    </div>
+    </main>
 </template>
 
 <script>

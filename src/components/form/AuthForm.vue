@@ -13,6 +13,7 @@ import {
     isRequired
 } from "../../utils/validationRules.js";
 export default {
+
     data() {
         return {
             id: "",
@@ -59,10 +60,6 @@ export default {
                 isRequired
             };
         },
-
-        // emailRules() {
-        //     return [this.rules.isRequired, this.rules.emailValidation];
-        // },
     },
 
     watch: {

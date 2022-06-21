@@ -1,8 +1,8 @@
 <template>
-    <div class="hello">
+    <main class="hello">
         <h1>LeadHit</h1>
         <AuthForm />
-    </div>
+    </main>
 </template>
 
 <script>
