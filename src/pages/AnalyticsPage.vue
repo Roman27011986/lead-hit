@@ -19,60 +19,130 @@ export default {
     },
 
     mounted() {
-        var root = am5.Root.new("root");
-        root.setThemes([
-            am5themes_Animated.new(root),
-        ]);
+        
+        let root = am5.Root.new("root");
+        root.setThemes([am5themes_Animated.new(root)]);
+
         var chart = root.container.children.push(
-            am5xy.XYChart.new(root, {})
+            am5xy.XYChart.new(root, {
+                panY: false,
+                wheelY: "zoomX",
+                layout: root.verticalLayout,
+                maxTooltipDistance: 0
+            })
         );
 
+        // Define data
+        var data = [{
+            date: new Date(2021, 0, 1).getTime(),
+            value:777
+        }, {
+            date: new Date(2021, 0, 2).getTime(),
+            value: 320
+        }, {
+            date: new Date(2021, 0, 3).getTime(),
+            value: 216
+        }, {
+            date: new Date(2021, 0, 4).getTime(),
+            value: 150
+        }, {
+            date: new Date(2021, 0, 5).getTime(),
+            value: 156
+        }, {
+            date: new Date(2021, 0, 6).getTime(),
+            value: 199
+        }, {
+            date: new Date(2021, 0, 7).getTime(),
+            value: 114
+        }, {
+            date: new Date(2021, 0, 8).getTime(),
+            value: 269
+        }, {
+            date: new Date(2021, 0, 9).getTime(),
+            value: 90
+        }, {
+            date: new Date(2021, 0, 10).getTime(),
+            value: 300
+        }, {
+            date: new Date(2021, 0, 11).getTime(),
+            value: 150
+        }, {
+            date: new Date(2021, 0, 12).getTime(),
+            value: 110
+        }, {
+            date: new Date(2021, 0, 13).getTime(),
+            value: 185
+        }, {
+            date: new Date(2021, 0, 14).getTime(),
+            value: 105
+            }];
+
+        
+
+        // Create Y-axis
         var yAxis = chart.yAxes.push(
             am5xy.ValueAxis.new(root, {
+                extraTooltipPrecision: 1,
                 renderer: am5xy.AxisRendererY.new(root, {})
             })
         );
 
-        var xAxis = chart.xAxes.push(
-            am5xy.CategoryAxis.new(root, {
-                renderer: am5xy.AxisRendererX.new(root, {}),
-                categoryField: "category",
-                baseInterval: {
-                    timeUnit: "day",
-                    count: 1
-                }
+        // Create X-Axis
+        let xAxis = chart.xAxes.push(
+            am5xy.DateAxis.new(root, {
+                baseInterval: { timeUnit: "day", count: 1 },
+                renderer: am5xy.AxisRendererX.new(root, {})
             })
         );
 
-        xAxis.data.setAll([{
-            category: "Research"
-        }, {
-            category: "Marketing"
-        }, {
-            category: "Sales"
-            }]);
+        xAxis.get("dateFormats")["day"] = "MM/dd";
+        xAxis.get("periodChangeDateFormats")["day"] = "MMMM";
 
-        var series = chart.series.push(
-            am5xy.ColumnSeries.new(root, {
-                name: "Series",
-                xAxis: xAxis,
-                yAxis: yAxis,
-                valueYField: "value",
-                valueXField: "date"
-            })
-        );
+        // Create series
+        function createSeries(name, field) {
+            var series = chart.series.push(
+                am5xy.LineSeries.new(root, {
+                    name: name,
+                    xAxis: xAxis,
+                    yAxis: yAxis,
+                    valueYField: field,
+                    valueXField: "date",
+                    tooltip: am5.Tooltip.new(root, {})
+                })
+            );
 
-        series.data.setAll([{
-            category: "Research",
-            value: 1000
-        }, {
-            category: "Marketing",
-            value: 1200
-        }, {
-            category: "Sales",
-            value: 850
-        }]);
+            series.bullets.push(function () {
+                return am5.Bullet.new(root, {
+                    sprite: am5.Circle.new(root, {
+                        radius: 5,
+                        fill: series.get("fill")
+                    })
+                });
+            });
 
+            series.strokes.template.set("strokeWidth", 2);
+
+            series.get("tooltip").label.set("text", "[bold]{name}[/]\n{valueX.formatDate()}: {valueY}")
+            series.data.setAll(data);
+        }
+
+        createSeries("Series", "value");
+
+        // Add cursor
+        chart.set("cursor", am5xy.XYCursor.new(root, {
+            behavior: "zoomXY",
+            xAxis: xAxis
+        }));
+
+        xAxis.set("tooltip", am5.Tooltip.new(root, {
+            themeTags: ["axis"]
+        }));
+
+        yAxis.set("tooltip", am5.Tooltip.new(root, {
+            themeTags: ["axis"]
+        }));
+
+       
         
     }
 }
