@@ -16,21 +16,24 @@ export default {
 
     data() {
         return {
-            price: "",
-            q: "",
+            id: "",
         };
     },
+
     computed: {
     },
+    
     methods: {
        async handleSubmit() {
             this.$emit("submit", {
-                price: this.price,
+                id: this.id,
             });
             try {
-                const { data } = await getAuth(this.price);
+                const { data } = await getAuth(this.id);
                 this.$router.push({ name: "analytics" });
-                console.log(data);
+                if (data?.message) {
+                    localStorage.setItem('leadhit-site-id', this.id )
+                }
             } catch (error) {
                 console.log(error);
             }
