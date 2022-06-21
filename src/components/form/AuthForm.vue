@@ -1,7 +1,7 @@
 <template>
     <form @submit.prevent="handleSubmit">
         <input
-           v-model="price"
+           v-model="id"
          />   
         <button type="submit">Подбор жилья</button>
     </form>
@@ -10,17 +10,10 @@
 <script>
 import { getAuth } from "../../services/auth.service";
 export default {
-    components: {
-       
-    },
-
     data() {
         return {
             id: "",
         };
-    },
-
-    computed: {
     },
     
     methods: {
