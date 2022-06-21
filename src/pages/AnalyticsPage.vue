@@ -21,7 +21,7 @@ export default {
     },
 
     mounted() {
-
+    
         const data = this.$store.state.date.map(e => ({
             date: Date.parse(e.date),
             value: e.visits
