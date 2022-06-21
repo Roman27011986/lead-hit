@@ -1,5 +1,5 @@
 <template>
-    <main class="hello">
+    <main>
         <h1>LeadHit</h1>
         <AuthForm />
     </main>

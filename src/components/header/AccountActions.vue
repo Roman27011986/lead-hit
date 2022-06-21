@@ -1,5 +1,5 @@
 <template>
-    <div class="auth-actions">
+    <div>
         <router-link :to="{ name: 'home' }">Вход</router-link>
         <router-link :to="{ name: 'analytics' }">Регистрация</router-link>
     </div>

@@ -1,8 +1,9 @@
 <template>
     <h1>Аналитика</h1>
-    <main class="hello" id="root">
-        <h2>Аналитика по визитам</h2>
-    </main>
+    <section class="charts__section">
+        <h2 class="charts__title">Аналитика по визитам</h2>
+        <div id="root" class="charts__root"></div>
+    </section>
 </template>
 
 <script>
@@ -35,7 +36,7 @@ export default {
                 panY: false,
                 wheelY: "zoomX",
                 layout: root.verticalLayout,
-                maxTooltipDistance: 0
+                maxTooltipDistance: 1
             })
         );
 
@@ -74,7 +75,7 @@ export default {
             series.bullets.push(function () {
                 return am5.Bullet.new(root, {
                     sprite: am5.Circle.new(root, {
-                        radius: 5,
+                        radius: 6,
                         fill: series.get("fill")
                     })
                 });
@@ -110,9 +111,18 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 
-.hello{
+.charts__root {
     width: 100%;
-    height: 70vh;
+    height: 60vh;
     margin: auto;
+}
+.charts__section {
+    border: 2px solid red;
+    border-radius: 14px;
+   background-color: beige;
+}
+
+.charts__title {
+    color: white;
 }
 </style>
