@@ -7,12 +7,12 @@ const routes = [
   {
     path: "/",
     component: HomePage,
-    name: "homepage",
+    name: "home",
   },
   {
     path: "/analytics",
     component: AnalyticsPage,
-    name: "analyticspage",
+    name: "analytics",
   },
 ];
 

@@ -8,7 +8,7 @@
 </template>
 
 <script>
-
+import { getAuth } from "../../services/auth.service";
 export default {
     components: {
        
@@ -17,15 +17,23 @@ export default {
     data() {
         return {
             price: "",
+            q: "",
         };
     },
     computed: {
     },
     methods: {
-        handleSubmit() {
+       async handleSubmit() {
             this.$emit("submit", {
                 price: this.price,
             });
+            try {
+                const { data } = await getAuth(this.price);
+                this.$router.push({ name: "analytics" });
+                console.log(data);
+            } catch (error) {
+                console.log(error);
+            }
         },
     },
 };
