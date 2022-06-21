@@ -1,14 +1,16 @@
 <template>
+    <h1>Аналитика</h1>
     <div class="hello" id="root">
-       Analytics
+        <h2>Аналитика по визитам</h2>
     </div>
 </template>
 
 <script>
+
 import * as am5 from "@amcharts/amcharts5";
 import * as am5xy from "@amcharts/amcharts5/xy";
 import am5themes_Animated from "@amcharts/amcharts5/themes/Animated";
-// import am5themes_Micro from "@amcharts/amcharts5/themes/Micro";
+
 export default {
     name: 'AnalyticsPage',
 
@@ -19,11 +21,16 @@ export default {
     },
 
     mounted() {
-        
-        let root = am5.Root.new("root");
+
+        const data = this.$store.state.date.map(e => ({
+            date: Date.parse(e.date),
+            value: e.visits
+        }));
+
+        const root = am5.Root.new("root");
         root.setThemes([am5themes_Animated.new(root)]);
 
-        var chart = root.container.children.push(
+        const chart = root.container.children.push(
             am5xy.XYChart.new(root, {
                 panY: false,
                 wheelY: "zoomX",
@@ -32,55 +39,8 @@ export default {
             })
         );
 
-        // Define data
-        var data = [{
-            date: new Date(2021, 0, 1).getTime(),
-            value:777
-        }, {
-            date: new Date(2021, 0, 2).getTime(),
-            value: 320
-        }, {
-            date: new Date(2021, 0, 3).getTime(),
-            value: 216
-        }, {
-            date: new Date(2021, 0, 4).getTime(),
-            value: 150
-        }, {
-            date: new Date(2021, 0, 5).getTime(),
-            value: 156
-        }, {
-            date: new Date(2021, 0, 6).getTime(),
-            value: 199
-        }, {
-            date: new Date(2021, 0, 7).getTime(),
-            value: 114
-        }, {
-            date: new Date(2021, 0, 8).getTime(),
-            value: 269
-        }, {
-            date: new Date(2021, 0, 9).getTime(),
-            value: 90
-        }, {
-            date: new Date(2021, 0, 10).getTime(),
-            value: 300
-        }, {
-            date: new Date(2021, 0, 11).getTime(),
-            value: 150
-        }, {
-            date: new Date(2021, 0, 12).getTime(),
-            value: 110
-        }, {
-            date: new Date(2021, 0, 13).getTime(),
-            value: 185
-        }, {
-            date: new Date(2021, 0, 14).getTime(),
-            value: 105
-            }];
-
-        
-
         // Create Y-axis
-        var yAxis = chart.yAxes.push(
+        const yAxis = chart.yAxes.push(
             am5xy.ValueAxis.new(root, {
                 extraTooltipPrecision: 1,
                 renderer: am5xy.AxisRendererY.new(root, {})
@@ -88,7 +48,7 @@ export default {
         );
 
         // Create X-Axis
-        let xAxis = chart.xAxes.push(
+        const xAxis = chart.xAxes.push(
             am5xy.DateAxis.new(root, {
                 baseInterval: { timeUnit: "day", count: 1 },
                 renderer: am5xy.AxisRendererX.new(root, {})
@@ -100,7 +60,7 @@ export default {
 
         // Create series
         function createSeries(name, field) {
-            var series = chart.series.push(
+            const series = chart.series.push(
                 am5xy.LineSeries.new(root, {
                     name: name,
                     xAxis: xAxis,
@@ -141,8 +101,6 @@ export default {
         yAxis.set("tooltip", am5.Tooltip.new(root, {
             themeTags: ["axis"]
         }));
-
-       
         
     }
 }
@@ -153,8 +111,8 @@ export default {
 <style scoped>
 
 .hello{
-    width: 1200px;
-    height: 300px;
+    width: 100%;
+    height: 70vh;
     margin: auto;
 }
 </style>

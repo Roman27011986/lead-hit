@@ -1,6 +1,6 @@
 <template>
     <div class="hello">
-        Home
+        <h1>LeadHit</h1>
         <AuthForm />
     </div>
 </template>
