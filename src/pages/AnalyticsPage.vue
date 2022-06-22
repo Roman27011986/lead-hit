@@ -16,6 +16,15 @@ import am5themes_Animated from "@amcharts/amcharts5/themes/Animated";
 export default {
     name: 'AnalyticsPage',
 
+    data() {
+        return {
+            id: "",
+            isValid: true,
+            error: "",
+            errorMessage: 'error'
+        };
+    },
+
     beforeCreate() {
         if (!localStorage.getItem('leadhit-site-id')) {
             this.$router.push({ name: "home" });
@@ -103,10 +112,11 @@ export default {
         yAxis.set("tooltip", am5.Tooltip.new(root, {
             themeTags: ["axis"]
         }));
-        
+        this.root = root;
     },
 
     beforeUnmount() {
+        console.log(this.root);
         if (this.root) {
             this.root.dispose();
         }
