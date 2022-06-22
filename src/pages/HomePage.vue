@@ -1,7 +1,9 @@
 <template>
     <main>
-        <h1>LeadHit</h1>
-        <auth-form />
+        <section>
+            <h1>LeadHit</h1>
+            <auth-form />
+        </section>
     </main>
 </template>
 

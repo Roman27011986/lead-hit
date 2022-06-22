@@ -5,7 +5,7 @@
                 <router-link class="main-nav__link" :to="{ name: 'home' }">Вход</router-link>
             </li>
             <li class="main-nav__list-item">
-                <router-link class="main-nav__link" :to="{ name: this.isLog ? 'analytics' : 'home' }">Регистрация
+                <router-link class="main-nav__link" :to="{ name: 'analytics' }">Регистрация
                 </router-link>
             </li>
         </ul>
@@ -15,18 +15,6 @@
 <script>
 export default {
     name: "MainNav",
-
-    data() {
-        return {
-            isLog: true,
-        };
-    },
-
-    mounted() {
-        if (!localStorage.getItem('leadhit-site-id')) {
-            this.isLog = !this.isLog
-        }
-    }
 };
 </script>
 

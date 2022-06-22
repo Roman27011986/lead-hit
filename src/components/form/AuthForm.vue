@@ -26,7 +26,7 @@ export default {
     
     methods: {
         async handleSubmit() {
-            if (!this.isValidate(this.id, this.rules.isRequired) || !this.isValidate(this.id, this.rules.fieldLengthValidation)) {
+            if (!this.isValidate(this.id, isRequired) || !this.isValidate(this.id, fieldLengthValidation)) {
                 return
             }
             this.$emit("submit", {
@@ -54,31 +54,19 @@ export default {
         },
 
         validete(value) {
-            this.isValid = this.isValidate(value, this.rules.fieldLengthValidation)
-        },
-    },
-
-    computed: {
-        rules() {
-            return {
-                fieldLengthValidation,
-                isRequired
-            };
+            this.isValid = this.isValidate(value,fieldLengthValidation)
         },
     },
 
     watch: {
-        id(v) {
-            this.validete(v);
+        id(value) {
+            this.validete(value);
         },
     },
 };
 </script>
 
 <style scoped>
-
-
-
    .form {
     display: flex;
     flex-direction: column;
