@@ -8,7 +8,7 @@ const AnalyticsPage = () => import("@/pages/AnalyticsPage.vue");
 
 const routes = [
   {
-    path: "/",
+    path: "/lead-hit",
     component: HomePage,
     name: "home",
   },
