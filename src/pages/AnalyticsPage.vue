@@ -1,9 +1,9 @@
 <template>
-        <section class="charts__section">
-            <h1>Аналитика</h1>
-            <h2 class="charts__title">Аналитика по визитам</h2>
-            <div id="root" class="charts__root"></div>
-        </section>
+    <section class="charts__section">
+        <h1>Аналитика</h1>
+        <h2 class="charts__title">Аналитика по визитам</h2>
+        <div ref="chartdiv" class="charts__root"></div>
+    </section>
 </template>
 
 <script>
@@ -38,7 +38,7 @@ export default {
             value: e.visits
         }));
 
-        const root = am5.Root.new("root");
+        const root = am5.Root.new(this.$refs.chartdiv);
         root.setThemes([am5themes_Animated.new(root)]);
 
         const chart = root.container.children.push(
@@ -116,7 +116,6 @@ export default {
     },
 
     beforeUnmount() {
-        console.log(this.root);
         if (this.root) {
             this.root.dispose();
         }
