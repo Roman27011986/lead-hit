@@ -2,7 +2,7 @@
   "name": "lead-hit",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://Roman27011986.github.io/lead-hit/",
+  "homepage": "https://Roman27011986.github.io",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
