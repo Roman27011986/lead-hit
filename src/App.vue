@@ -1,16 +1,18 @@
 <template>
-  <div>
-    <AuthActions />
+  <main-container>
+    <main-nav />
     <router-view></router-view>
-  </div>
+  </main-container>
 </template>
 
 <script>
-import AuthActions from "./components/header/AccountActions.vue";
+import MainNav from "./components/header/MainNav.vue";
+import MainContainer from "./components/shared/MainContainer.vue";
 export default {
   name: 'App',
   components: {
-    AuthActions
+    MainNav,
+    MainContainer
   }
 }
 </script>
@@ -22,6 +24,5 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
 }
 </style>

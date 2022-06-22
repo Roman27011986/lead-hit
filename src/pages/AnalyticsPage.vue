@@ -15,12 +15,6 @@ import am5themes_Animated from "@amcharts/amcharts5/themes/Animated";
 export default {
     name: 'AnalyticsPage',
 
-    beforeCreate() {
-        if (!localStorage.getItem('leadhit-site-id')) {
-            this.$router.push({ name: "home" });
-        }
-    },
-
     mounted() {
     
         const data = this.$store.state.date.map(e => ({
@@ -117,12 +111,12 @@ export default {
     margin: auto;
 }
 .charts__section {
-    border: 2px solid red;
+    border: 2px solid rgba(205, 162, 205, 0.291);
     border-radius: 14px;
-   background-color: beige;
+   background-color: rgba(162, 108, 157, 0.134);
 }
 
 .charts__title {
-    color: white;
+    color: rgba(47, 144, 214, 0.756);
 }
 </style>

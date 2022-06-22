@@ -1,19 +1,20 @@
 <template>
-    <form @submit.prevent="handleSubmit">
-        <input v-model="id" class="custom-input" :class="!isValid && 'custom-input--error'" />
-        <span v-if="!isValid">{{ error }}</span>
-        <button type="submit" ref="btn" disabled=true>Войти</button>
+    <form class="form" @submit.prevent="handleSubmit">
+        <input v-model="id" class="form__input" :class="!isValid && 'form__input--error'" />
+        <span class="form__error-text" v-if="!isValid">{{ error }}</span>
+        <button class="form__btn" type="submit">Войти</button>
     </form>
 </template>
 
 <script>
+
 import { getAuth } from "../../services/auth.service";
 import {
-    emailValidation,
+    fieldLengthValidation,
     isRequired
 } from "../../utils/validationRules.js";
-export default {
 
+export default {
     data() {
         return {
             id: "",
@@ -25,38 +26,42 @@ export default {
     
     methods: {
         async handleSubmit() {
-            
+            if (!this.isValidate(this.id, this.rules.isRequired) || !this.isValidate(this.id, this.rules.fieldLengthValidation)) {
+                return
+            }
             this.$emit("submit", {
                 id: this.id,
             });
-
             try {
                 const { data } = await getAuth(this.id);
-                this.$router.push({ name: "analytics" });
                 if (data?.message) {
-                    localStorage.setItem('leadhit-site-id', this.id )
+                    localStorage.setItem('leadhit-site-id', this.id)
+                    this.$router.push({ name: "analytics" });
                 }
             } catch (error) {
                 console.log(error);
             }
         },
 
-        validete(value) {
-            const { hasPassed, message } = this.rules.emailValidation(value)
-            this.$refs.btn.disabled = !hasPassed
-            if (!hasPassed) {
+        isValidate(value, cb) {
+            const { hasPassed, message } = cb(value)
+            if (value && !hasPassed || !value && !hasPassed) {
                 this.error = message || this.errorMessage;
                 this.isValid = hasPassed
-                return
-            }
-            this.isValid = hasPassed
+                return hasPassed
+            } 
+            return hasPassed
+        },
+
+        validete(value) {
+            this.isValid = this.isValidate(value, this.rules.fieldLengthValidation)
         },
     },
 
     computed: {
         rules() {
             return {
-                emailValidation,
+                fieldLengthValidation,
                 isRequired
             };
         },
@@ -71,17 +76,46 @@ export default {
 </script>
 
 <style scoped>
-   .custom-input {
+
+
+
+   .form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+   }
+   .form__input {
        min-height: 40px;
         font-size: 18px;
         outline: none;
         line-height: inherit;
         padding: 8px 15px;
    }
-        .custom-input::placeholder {
+        .form__input::placeholder {
             color: inherit;
         }
-                .custom-input--error {
+                .form__input--error {
                     border-color: red;
                 }
+
+            .form__error-text {
+                font-size: 12px;
+                color: red;
+            }
+
+                .form__btn {
+                    width: 100px;
+                    height: 40px;
+                    cursor: pointer;
+                    border: none;
+                    color: #2c3e50;
+                    background-color: rgba(47, 144, 214, 0.228);
+                    margin-top: 40px;
+                    transition: all 250ms linear;
+                }
+
+                                .form__btn:hover {
+                                background-color: rgba(10, 127, 210, 0.535);
+                                color: aliceblue;
+                                }
 </style>

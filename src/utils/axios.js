@@ -1,7 +1,7 @@
-// import axios from "axios";
+import axios from "axios";
 
-// const axiosInstance = axios.create({
-//   baseURL: "https://track-api.leadhit.io/client/",
-// });
+const axiosInstance = axios.create({
+  baseURL: "https://track-api.leadhit.io/",
+});
 
-// export default axiosInstance;
+export default axiosInstance;
