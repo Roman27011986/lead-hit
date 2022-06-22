@@ -2,13 +2,12 @@
   "name": "lead-hit",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://Roman27011986.github.io/lead-hit",
+  "homepage": "https://Roman27011986.github.io/lead-hit/",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
+    "github": "gh-pages -d dist"
   },
   "dependencies": {
     "@amcharts/amcharts5": "^5.2.8",
