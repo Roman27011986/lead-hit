@@ -2,10 +2,10 @@
     <nav class="main-nav">
         <ul class="main-nav__list">
             <li class="main-nav__list-item">
-                <router-link class="main-nav__link" :to="{ name: 'home' }">Вход</router-link>
+                <router-link class="main-nav__link" :to="{ name: 'home' }">Авторизация</router-link>
             </li>
             <li class="main-nav__list-item">
-                <router-link class="main-nav__link" :to="{ name: 'analytics' }">Регистрация
+                <router-link class="main-nav__link" :to="{ name: 'analytics' }">Аналитика
                 </router-link>
             </li>
         </ul>
