@@ -1,11 +1,9 @@
 <template>
-    <main>
         <section class="charts__section">
             <h1>Аналитика</h1>
             <h2 class="charts__title">Аналитика по визитам</h2>
             <div id="root" class="charts__root"></div>
         </section>
-    </main>
 </template>
 
 <script>
